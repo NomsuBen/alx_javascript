@@ -3,4 +3,4 @@
     file that modifies the value of myVar to 333
 */
 
-myVar = 89;
+myVar = 333;
