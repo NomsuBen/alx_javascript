@@ -9,5 +9,5 @@ You are not allowed to use var
 */
 
 exports.adMeMaybe = function (number, theFunction) {
-    theFunction(number);
+    theFunction(++number);
 };
