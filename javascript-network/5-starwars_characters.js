@@ -7,6 +7,9 @@ Display one character name by line
 You must use the Star wars API
 You must use the module request
  */
+
+#!/usr/bin/node
+
 const request = require('request');
 
 const movieId = process.argv[2];
