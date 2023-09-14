@@ -10,33 +10,19 @@ You must use the module request
 
 const request = require('request');
 
-const movieId = process.argv[2];
-const url = `https://swapi.dev/api/films/${movieId}/`;
-let characters = [];
-
-request(url, (error, response, body) => {
+req.get('https://swapi-api.hbtn.io/api/films/' + process.argv[2], function (error, res, body) {
   if (error) {
     console.log(error);
-    return;
   }
-
   const data = JSON.parse(body);
-  characters = data.characters;
-  getCharacters(0);
-});
-
-const getCharacters = (index) => {
-  if (index === characters.length) {
-    return;
+  const dd = data.characters;
+  for (const i of dd) {
+    req.get(i, function (error, res, body1) {
+      if (error) {
+        console.log(error);
+      }
+      const data1 = JSON.parse(body1);
+      console.log(data1.name);
+    });
   }
-
-  request(characters[index], (error, response, body) => {
-    if (error) {
-      console.log(error);
-      return;
-    }
-    const characterData = JSON.parse(body);
-    console.log(characterData.name);
-    getCharacters(index + 1);
-  });
-};
+});
