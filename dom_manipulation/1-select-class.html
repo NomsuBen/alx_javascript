@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Selecting Elements</title>
+  <style>
+    .highlight {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <p class="highlight">This is a highlighted paragraph.</p>
+  <p>This is a normal paragraph.</p>
+  <script>
+/**
+ Use the DOM API to modify the format of the <p class="highlight"> element to make the content boldened
+Make use of document.querySelectorAll
+Verify that the program successfully modifies the element content when the HTML file is opened in a browser.
+*/
+    const pharagrapHighlight = document.querySelectorAll(".highlight");
+    pharagrapHighlight.forEach(e => {
+        e.style.fontWeight = "bold";
+    })
+  </script>
+</body>
+</html>

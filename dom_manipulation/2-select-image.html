@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Modifying Elements</title>
+  <style>
+    img {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <img id="myImage" src="https://picsum.photos/200/300" alt="My Image">
+  <script>
+    /**
+     Write JavaScript code to select the <img> element using its id and store it in a variable.
+Use the DOM API to modify the following:
+the src to https://picsum.photos/200/301,
+the alt to New image
+the border style to 2px solid red
+Make use of document.getElementById
+Verify that the program successfully modifies the element content when the HTML file is opened in a browser.
+    */
+    const myImage = document.getElementById("myImage");
+    myImage.setAttribute("src", "https://picsum.photos/200/301")
+    myImage.setAttribute("alt", "New image")
+    myImage.style.border = "2px solid red"
+  </script>
+</body>
+</html>
