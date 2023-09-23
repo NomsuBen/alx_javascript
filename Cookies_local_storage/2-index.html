@@ -1,8 +1,16 @@
 <!--
-    In a file 1-index.html:
+    In a file 2-index.html:
 
 Reuse the code of the previous task
-Modify the way you are setting cookies to expire in 10 days
+
+Create a function getCookie:
+
+It accepts name as argument
+It should return the value of the cookie with the name passed in argument
+If the cookie does not exist, it should return an empty string
+Modify the function showCookies:
+
+It should display the paragraph Email: EMAIL - Firstname: FIRSTNAME
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -46,12 +54,24 @@ Modify the way you are setting cookies to expire in 10 days
 
             alert("Cookies set Successfully")
         }
-       //This shows the cookie
-       function showCookies() {
-            const cookies = document.cookie;
-            const cookiesElement = document.getElementById('cookiesValue');
-            cookiesElement.innerHTML = `Cookies: ${cookies}`;
+// function to getCookies with argument name and check it 
+function getCookie(name) {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.startsWith(name + '=')) {
+                    return cookie.substring(name.length + 1);
+                }
+            }
+            return '';
         }
-    </script>
+
+        function showCookies() {
+            // update showCookies to check name and email from getCookie function
+            const email = getCookie('email');
+            const firstname = getCookie('firstname');
+            const cookiesElement = document.getElementById('cookiesValue');
+            cookiesElement.innerHTML = `Email: ${email} - Firstname: ${firstname}`;
+        }    </script>
 </body>
 </html>

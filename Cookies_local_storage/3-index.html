@@ -1,0 +1,127 @@
+<!--
+    in a file 3-index.html, reuse your code from the previous task
+
+add a div in html that will contain the login form:
+
+You can reuse the one you previously wrote
+It has one h2
+It has two text inputs
+It has one button
+Write a function named showForm:
+
+It should remove the Welcome message if it exists
+It should show the form
+Write a function named hideForm:
+
+It should hide the form
+Write a function named deleteCookiesAndShowForm:
+
+It should remove the two cookies
+it should show the form by calling the showForm function
+Write a function named showWelcomeMessageOrForm:
+
+if user is not logged in, the function showForm is called
+If the user is logged in, replace the body of the page with a h1
+It should display Welcome FIRSTNAME (logout)
+(logout) should be a link
+The link font should be display in normal weight, italic, and 10px to the right of the message
+On click, call the function deleteCookiesAndShowForm, hide the welcome message, and show the form
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+</head>
+
+<body>
+    <h1>Login to the website</h1>
+    <form>
+        <div>
+            <input type="text" id="firstname" placeholder="Firstname">
+            <input type="email" id="email" placeholder="Email">
+            <button type="button" onclick="setCookies()">Log me in</button>
+        </div>
+        <br>
+        <h1 id="cookiesValue">Cookies</h1>
+        <br>
+        <button type="button" onclick="showCookies()">Show the cookies</button>
+    </form>
+
+    <script>
+        function setCookies() {
+            const firstname = document.getElementById('firstname');
+            const email = document.getElementById('email');
+            const nameValue = firstname.value;
+            const emailValue = email.value;
+
+            // create instance from Date to add in expire date
+            const expirationDate = new Date();
+            expirationDate.setDate(expirationDate.getDate() + 10);
+
+            // add expire date to the cookies
+
+            document.cookie = `firstname=${nameValue} ; expires=${expirationDate.toUTCString()}`;
+            document.cookie = `email=${emailValue}; expires=${expirationDate.toUTCString()}`;
+
+
+            alert("Cookies set Successfully")
+        }
+function getCookie(name) {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.startsWith(name + '=')) {
+                    return cookie.substring(name.length + 1);
+                }
+            }
+            return '';
+        }
+
+        function showCookies() {
+            const email = getCookie('email');
+            const firstname = getCookie('firstname');
+            const cookiesElement = document.getElementById('cookiesValue');
+            cookiesElement.innerHTML = `Email: ${email} - Firstname: ${firstname}`;
+        }
+
+        function showForm() {
+            const welcomeMessage = document.getElementById('welcomeMessage');
+            const loginForm = document.getElementById('loginForm');
+            welcomeMessage.style.display = 'none';
+            loginForm.style.display = 'block';
+        }
+
+        function hideForm() {
+            const loginForm = document.getElementById('loginForm');
+            loginForm.style.display = 'none';
+        }
+
+        function deleteCookiesAndShowForm() {
+            document.cookie = 'firstname=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+            document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+            showForm();
+        }
+
+        function showWelcomeMessageOrForm() {
+            const email = getCookie('email');
+            const firstname = getCookie('firstname');
+            const welcomeMessage = document.getElementById('welcomeMessage');
+            const loginForm = document.getElementById('loginForm');
+
+            if (email && firstname) {
+                document.body.innerHTML = '<h1>Welcome ' + firstname + ' <a href="3-index.html" onclick="deleteCookiesAndShowForm(); return false;" style="font-weight: normal; font-style: italic; margin-left: 10px;">(logout)</a></h1>';
+                welcomeMessage.style.display = 'none';
+                loginForm.style.display = 'block';
+            } else {
+                welcomeMessage.style.display = 'none';
+                loginForm.style.display = 'block';
+            }
+        }
+
+        showWelcomeMessageOrForm();    
+    </script>
+</body>
+</html>
